@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Sweet Bhumika's Love Notes! 💗</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to right, #ffdee9, #b5fffc);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #4d004d;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* Center content vertically for password screen */
+      align-items: center; /* Center content horizontally */
+    }
+
+    .header {
+      padding: 30px 20px 10px;
+    }
+
+    .header h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 38px;
+      color: #ff4da6;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      font-size: 18px;
+      color: #7d007d;
+      margin-top: 0;
+    }
+
+    .form-box, #passwordSetup { /* Apply common styles to password box */
+      background-color: white;
+      border-radius: 25px;
+      padding: 35px;
+      max-width: 550px;
+      margin: 30px auto;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+      position: relative;
+      z-index: 2;
+    }
+
+    #passwordSetup {
+      display: flex; /* Use flexbox for centering content inside */
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 250px; /* Give it some height */
+    }
+
+    #passwordSetup h2 {
+      font-family: 'Pacifico', cursive;
+      color: #ff4da6;
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+
+    #passwordSetup input[type="password"] { /* Specific style for password input */
+      width: calc(100% - 40px); /* Adjust width for padding */
+      padding: 15px 20px; /* More padding */
+      margin-bottom: 20px;
+      border: 2px solid #ff99cc;
+      border-radius: 12px;
+      font-size: 20px; /* Larger font */
+      text-align: center;
+      background-color: #fff0f5;
+    }
+
+    #passwordSetup button {
+      background-color: #9933ff; /* Different color for password button */
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    #passwordSetup button:hover {
+      background-color: #7a00cc;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+
+    #passwordError {
+      color: #e60073;
+      margin-top: 15px;
+      font-weight: 600;
+    }
+
+    input, textarea, select {
+      width: calc(100% - 24px);
+      padding: 14px;
+      margin: 12px 0;
+      border: 2px solid #ff99cc;
+      border-radius: 12px;
+      font-size: 17px;
+      background-color: #fff0f5;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: #ff4da6;
+      outline: none;
+    }
+
+    button {
+      background-color: #ff4da6;
+      color: white;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 18px;
+      font-size: 19px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      margin: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    button:hover {
+      background-color: #e60073;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 28px;
+      animation: floatHearts 8s linear infinite;
+      color: #ff66b2;
+      opacity: 0;
+    }
+
+    @keyframes floatHearts {
+      0% {
+        transform: translateY(100vh) scale(0.6);
+        opacity: 0.8;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.8);
+        opacity: 0;
+      }
+    }
+
+    .music {
+      margin: 20px;
+      position: absolute;
+      left: -9999px;
+    }
+
+    .gallery {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+      margin: 25px auto;
+      max-width: 95%;
+    }
+
+    .photo {
+      width: 150px;
+      height: 200px;
+      border: 6px solid white;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      transform: rotate(-4deg);
+      transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+    }
+
+    .photo:nth-child(2) {
+      transform: rotate(5deg);
+    }
+
+    .photo:nth-child(3) {
+      transform: rotate(-6deg);
+    }
+
+    .photo:hover {
+      transform: scale(1.05) rotate(0deg);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    /* Hide main content initially */
+    #mainContent {
+      display: none;
+    }
+
+    #kittyPet {
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out; /* Smooth transition for hiding/showing */
+}
+
+#kittyMessage {
+  transition: opacity 0.5s ease-in-out;
+    }
+    
+    
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 32px;
+      }
+      .header p {
+        font-size: 16px;
+      }
+      .form-box, #passwordSetup {
+        padding: 25px;
+        margin: 20px auto;
+      }
+      input, textarea, select, button {
+        font-size: 16px;
+        padding: 10px;
+      }
+      .photo {
+        width: 120px;
+        height: 170px;
+      }
+      #passwordSetup h2 {
+        font-size: 24px;
+      }
+      #passwordSetup input[type="password"] {
+        font-size: 18px;
+        padding: 12px 15px;
+      }
+      #passwordSetup button {
+        font-size: 18px;
+        padding: 12px 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hearts" id="hearts-container"></div>
+
+<div id="passwordSetup" class="form-box">
+  <h2>💖 A Special Entrance for My Sweet Bhumika! 💖</h2>
+  <p>My love, please enter our secret code to unlock this space, just for us! ✨</p>
+  <input type="password" id="secretPassword" placeholder="Our Secret Code..." aria-label="Secret Password" onkeypress="handlePasswordEnter(event)" />
+  <button onclick="checkPassword()">Unlock Our World! 🔑</button>
+  <p id="passwordError" style="display: none;">Oops! That's not our secret code, my darling. Please try again! 🥺</p>
+</div>
+
+<div id="mainContent">
+  <div class="header">
+    <h1>💖 My Sweetest Bhumika, My Love! 💖</h1>
+    <p>Got a tiny little worry fluttering in your heart, my darling? Whisper it to me here! I'm always listening, with all my love! 💌</p>
+  </div>
+
+  <div class="gallery">
+    <div class="photo">
+      <img src="https://cdn.glitch.global/cc30ca30-e4e5-465d-858f-1f2e289d4545/file_00000000c07852309c0452c32c2ad117_conversation_id%3D67e828e9-56fc-8002-987e-bb9d930f486d%26message_id%3Dfc4d62c8-7434-48b3-a53f-1f3347e38d8a.webp?v=1748602226753" alt="Bhumika photo 1">
+    </div>
+    <div class="photo">
+      <img src="https://cdn.glitch.global/cc30ca30-e4e5-465d-858f-1f2e289d4545/440948122_1886029361839450_4916215600432605411_n_1886029358506117.jpg?v=1748602243644" alt="Bhumika photo 2">
+    </div>
+    <div class="photo">
+      <img src="https://cdn.glitch.global/cc30ca30-e4e5-465d-858f-1f2e289d4545/IMG-20240407-WA0000.jpg?v=1748602256450" alt="Bhumika photo 3">
+    </div>
+  </div>
+
+  <div class="form-box">
+    <form onsubmit="handleSubmit(event)">
+      <label for="title" class="sr-only">Grievance Title</label>
+      <input type="text" id="title" placeholder="My Little Heart's Grievance Is About..." required aria-label="Grievance Title"/>
+
+      <label for="complaint" class="sr-only">Complaint Details</label>
+      <textarea id="complaint" placeholder="Tell me everything, my love... (What's weighing on your sweet mind?)" rows="5" required aria-label="Complaint Details"></textarea>
+
+      <label for="mood" style="display: block; text-align: left; margin-bottom: 5px; color: #ff4da6; font-weight: 600;">How are you feeling right now, my angel? 🥰</label>
+      <select id="mood" aria-label="Current Mood">
+        <option value="😠 Angry">😠 A tiny bit grumpy!</option>
+        <option value="😢 Sad">😢 Feeling a little blue...</option>
+        <option value="😐 Meh">😐 Just... meh.</option>
+        <option value="😊 Happy">😊 Surprisingly happy about this!</option>
+        <option value="🥺 Needy">🥺 Need some extra cuddles!</option>
+        <option value="🤍 Missing You">🤍 Missing you terribly!</option>
+        <option value="😡 Furious">😡 Absolutely fuming!</option>
+        <option value="🥲 Overwhelmed">🥲 Feeling a little overwhelmed.</option>
+      </select>
+      <br>
+      <button type="submit">Send My Heart's Message to Anshul! 💖</button>
+    </form>
+  </div>
+
+<img id="kittyPet" src="https://cdn.glitch.global/68f26f33-63ee-4cb3-a9b1-ac18aa443fde/file_00000000ddc461f8b3767cbf8279bbc5%20(1).png?v=1748668167417" alt="Cute Virtual Kitty" style="display: none; position: fixed; z-index: 100; cursor: pointer; width: 100px; height: auto;">
+  
+<div id="kittyMessage" style="display: none; position: fixed; z-index: 101; background: #fff0f5; border: 2px solid #ff99cc; padding: 10px 15px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); font-family: 'Pacifico', cursive; color: #ff4da6; font-size: 18px; text-align: center;"></div>
+  
+</div> <div class="music">
+  <audio id="backgroundMusic" autoplay loop hidden>
+    <source src="https://cdn.glitch.global/cc30ca30-e4e5-465d-858f-1f2e289d4545/Blue-(SambalpuriStar.In).mp3?v=1748602420766" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</div>
+
+<script>
+  // === Configuration ===
+  const SECRET_CODE = "BhumikaLove"; // <--- **CHANGE THIS TO YOUR CUTE PASSWORD!**
+  // =====================
+
+  async function handleSubmit(event) { // Make it async for fetch
+    event.preventDefault();
+    const title = document.getElementById("title").value;
+    const complaint = document.getElementById("complaint").value;
+    const mood = document.getElementById("mood").value;
+
+    const grievanceData = {
+      title,
+      complaint,
+      mood,
+      date: new Date().toLocaleString() // Client-side date for consistency
+    };
+
+    try {
+      const response = await fetch('/submit-grievance', { // Send data to server
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(grievanceData)
+      });
+
+      if (response.ok) {
+        alert("💌 Aww, sent right to my heart, darling! I've heard your sweet worry, and I'll think about it with all my love and get back to you super soon! 💖");
+        document.querySelector("form").reset(); // Clear the form
+      } else {
+        alert("😔 Oh no, darling! Something went wrong sending your message. Please try again! ❤️");
+        console.error('Server error:', response.statusText);
+      }
+    } catch (error) {
+      alert("💔 My apologies, my love! I couldn't reach the server right now. Please check your internet and try again. 😥");
+      console.error('Network error:', error);
+    }
+  }
+
+  // --- Hearts animation (keep as is) ---
+  const hearts = ["💖","💗","💓","💞","💕","✨","🌟"];
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = 5 + Math.random() * 5 + "s";
+    heart.style.fontSize = 20 + Math.random() * 20 + "px";
+    heart.style.opacity = 0.7 + Math.random() * 0.3;
+    heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+    document.getElementById("hearts-container").appendChild(heart);
+    setTimeout(() => heart.remove(), parseInt(heart.style.animationDuration) * 1000);
+  }
+  setInterval(createHeart, 300);
+
+  // --- Password Functionality (keep as is) ---
+  function checkPassword() {
+    const enteredPassword = document.getElementById("secretPassword").value;
+    const passwordError = document.getElementById("passwordError");
+    const passwordSetup = document.getElementById("passwordSetup");
+    const mainContent = document.getElementById("mainContent");
+    const audio = document.getElementById('backgroundMusic');
+
+    if (enteredPassword === SECRET_CODE) {
+      passwordSetup.style.display = 'none';
+      mainContent.style.display = 'block';
+      passwordError.style.display = 'none';
+
+      if (audio) {
+        audio.play().catch(error => {
+          console.log("Music autoplay prevented on password entry:", error);
+        });
+      }
+    } else {
+      passwordError.style.display = 'block';
+      document.getElementById("secretPassword").value = '';
+      document.getElementById("secretPassword").focus();
+    }
+  }
+
+  function handlePasswordEnter(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      checkPassword();
+    }
+  }
+
+  window.onload = function() {
+    document.getElementById('mainContent').style.display = 'none';
+    document.getElementById('passwordSetup').style.display = 'flex';
+    document.getElementById('secretPassword').focus();
+  };
+  // === Virtual Kitty Pet Logic ===
+const kittyPet = document.getElementById('kittyPet');
+const kittyMessage = document.getElementById('kittyMessage');
+const kittyMessages = [
+  "Meow! Just checking in, my love! 💖",
+  "Purrrrr... Sending you warm thoughts! 😻",
+  "Found a cozy spot! Missing you! 🐾",
+  "A little whiskered kiss from me! 😘",
+  "Just a fleeting visit from your furry friend! 🐱",
+  "Hope you're smiling, my sweet human! 😊",
+  "Hiding now... but my love is always near! ❤️",
+  "Chasing butterflies and thinking of you! 🦋",
+  "Tap me if you dare! 😉",
+  "Secret message: you're the best! ✨"
+];
+
+let kittyTimer;
+let hideTimer;
+let currentMood = "playful"; // Initial mood
+
+function getRandomPosition() {
+  const x = Math.random() * (window.innerWidth - kittyPet.offsetWidth);
+  const y = Math.random() * (window.innerHeight - kittyPet.offsetHeight);
+  return { x, y };
+}
+
+function showKitty() {
+  if (kittyPet.style.display === 'block') return; // Don't show if already visible
+
+  const pos = getRandomPosition();
+  kittyPet.style.left = `${pos.x}px`;
+  kittyPet.style.top = `${pos.y}px`;
+  kittyPet.style.opacity = '1';
+  kittyPet.style.transform = 'scale(1)';
+  kittyPet.style.display = 'block';
+
+  // Set a random mood
+  const moods = ["playful", "shy", "curious", "affectionate"];
+  currentMood = moods[Math.floor(Math.random() * moods.length)];
+
+  // Auto-hide after a few seconds (randomized)
+  const hideDelay = 3000 + Math.random() * 5000; // 3 to 8 seconds
+  hideTimer = setTimeout(hideKitty, hideDelay);
+
+  console.log(`Kitty appeared! Mood: ${currentMood}`);
+}
+
+function hideKitty() {
+  kittyPet.style.opacity = '0';
+  kittyPet.style.transform = 'scale(0.8)'; // Make it look like it's shrinking away
+
+  clearTimeout(hideTimer); // Clear any pending hide
+  clearTimeout(kittyTimer); // Clear any pending appearance
+
+  // Show a message briefly
+  const message = kittyMessages[Math.floor(Math.random() * kittyMessages.length)];
+  kittyMessage.innerText = message;
+  const pos = getRandomPosition(); // Position message randomly
+  kittyMessage.style.left = `${pos.x}px`;
+  kittyMessage.style.top = `${pos.y}px`;
+  kittyMessage.style.opacity = '1';
+  kittyMessage.style.display = 'block';
+
+  setTimeout(() => {
+    kittyMessage.style.opacity = '0';
+    setTimeout(() => kittyMessage.style.display = 'none', 500); // Hide message after fade
+  }, 2500); // Message stays for 2.5 seconds
+
+  // Remove kitty from display after transition
+  setTimeout(() => {
+    kittyPet.style.display = 'none';
+    // Schedule next appearance (randomized)
+    kittyTimer = setTimeout(showKitty, 10000 + Math.random() * 20000); // 10 to 30 seconds until next appearance
+  }, 300); // Allow time for CSS transition
+
+  console.log("Kitty hid!");
+}
+
+kittyPet.addEventListener('click', () => {
+  console.log(`Kitty clicked! Mood: ${currentMood}`);
+
+  let reactionMessage = "";
+  if (currentMood === "shy") {
+    reactionMessage = "Oops! You startled me, I'm hiding now!";
+    hideKitty(); // Hide immediately if shy
+  } else if (currentMood === "playful") {
+    reactionMessage = "Purrrr! Thanks for the pet!";
+  } else if (currentMood === "curious") {
+    reactionMessage = "What do you want to show me, human?";
+  } else if (currentMood === "affectionate") {
+     reactionMessage = "Mrow! More cuddles, please!";
+  }
+
+  if (reactionMessage) {
+    kittyMessage.innerText = reactionMessage;
+    const kittyRect = kittyPet.getBoundingClientRect();
+    const messageX = kittyRect.left + kittyPet.offsetWidth / 2 - kittyMessage.offsetWidth / 2;
+    const messageY = kittyRect.top - kittyMessage.offsetHeight - 10; // Position above kitty
+
+    // Ensure message stays within view
+    kittyMessage.style.left = `${Math.max(0, Math.min(window.innerWidth - kittyMessage.offsetWidth, messageX))}px`;
+    kittyMessage.style.top = `${Math.max(0, messageY)}px`;
+    kittyMessage.style.opacity = '1';
+    kittyMessage.style.display = 'block';
+
+    setTimeout(() => {
+      kittyMessage.style.opacity = '0';
+      setTimeout(() => kittyMessage.style.display = 'none', 500); // Hide message after fade
+    }, 2000); // Message shows for 2 seconds
+  }
+
+  // Schedule next appearance sooner after a click
+  clearTimeout(kittyTimer);
+  clearTimeout(hideTimer); // Clear auto-hide if clicked
+  kittyTimer = setTimeout(showKitty, 5000 + Math.random() * 5000); // Appear faster after click (5-10s)
+});
+  
+
+// Start the kitty cycle when the page loads
+// Make sure this runs AFTER the main content is visible (after password check)
+const originalCheckPassword = checkPassword; // Store original function
+checkPassword = function() {
+    originalCheckPassword(); // Call original password check
+    if (document.getElementById('mainContent').style.display === 'block') {
+        // Only start kitty if password is correct and main content is visible
+        setTimeout(() => {
+            showKitty(); // Initial appearance after a short delay
+        }, 3000); // Wait 3 seconds after content appears
+    }
+};
+
+// Also, if the page is directly accessed without password, start kitty
+if (document.getElementById('mainContent').style.display === 'block') {
+    setTimeout(() => {
+        showKitty(); // Initial appearance after a short delay
+    }, 3000);
+}
+// === End Virtual Kitty Pet Logic ===
+  
+</script>
+
+</body>
+</html>
